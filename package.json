@@ -5,8 +5,7 @@
   "main": "dist/index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "build": "tsc",
-    "postinstall": "cd ./node_modules/electron-custom-notifications && npm install && npm run build"
+    "build": "tsc"
   },
   "author": "Kedi Agbogre",
   "license": "ISC",
