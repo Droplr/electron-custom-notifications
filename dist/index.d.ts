@@ -1,5 +1,5 @@
-import Notification from "./Notification";
-import INotificationOptions from "./INotificationOptions";
+import Notification from './Notification';
+import INotificationOptions from './INotificationOptions';
 /**
  * Spawns a new notification.
  * Warning: You MUST use this library from another
@@ -29,5 +29,5 @@ declare function setContainerWidth(width: number): void;
  * @param {string} template
  */
 declare function setDefaultTemplate(template: string): void;
-export { createNotification, setContainerWidth, setGlobalStyles, setDefaultTemplate, };
+export { createNotification, setContainerWidth, setGlobalStyles, setDefaultTemplate };
 //# sourceMappingURL=index.d.ts.map

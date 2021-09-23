@@ -1,4 +1,4 @@
-import Notification from "./Notification";
+import Notification from './Notification';
 /**
  * Container where Notifications are pushed into.
  *

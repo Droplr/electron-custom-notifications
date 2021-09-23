@@ -1,10 +1,6 @@
-import {
-  BrowserWindow,
-  BrowserWindowConstructorOptions,
-  ipcMain,
-} from "electron";
-import * as path from "path";
-import Notification from "./Notification";
+import { BrowserWindow, BrowserWindowConstructorOptions, ipcMain } from 'electron';
+import * as path from 'path';
+import Notification from './Notification';
 
 /**
  * Container where Notifications are pushed into.
@@ -57,9 +53,9 @@ class NotificationContainer {
    * @memberof NotificationContainer
    */
   constructor() {
-    let options: BrowserWindowConstructorOptions = {};
+    const options: BrowserWindowConstructorOptions = {};
 
-    const display = require("electron").screen.getPrimaryDisplay();
+    const display = require('electron').screen.getPrimaryDisplay();
     const displayWidth = display.workArea.x + display.workAreaSize.width;
     const displayHeight = display.workArea.y + display.workAreaSize.height;
 
@@ -79,36 +75,31 @@ class NotificationContainer {
 
     this.window = new BrowserWindow(options);
     this.window.setVisibleOnAllWorkspaces(true);
-    this.window.loadURL(path.join("file://", __dirname, "/container.html"));
+    this.window.loadURL(path.join('file://', __dirname, '/container.html'));
     this.window.setIgnoreMouseEvents(true, { forward: true });
     this.window.showInactive();
     // this.window.webContents.openDevTools();
 
-    ipcMain.on("notification-clicked", (e: any, id: string) => {
-      const notification = this.notifications.find(
-        notification => notification.id == id
-      );
+    ipcMain.on('notification-clicked', (e: any, id: string) => {
+      const n = this.notifications.find((notification) => notification.id === id);
 
-      if (notification) {
-        notification.emit("click");
+      if (n) {
+        n.emit('click');
       }
     });
 
-    ipcMain.on("make-clickable", (e: any) => {
+    ipcMain.on('make-clickable', (e: any) => {
       this.window.setIgnoreMouseEvents(false);
     });
 
-    ipcMain.on("make-unclickable", (e: any) => {
+    ipcMain.on('make-unclickable', (e: any) => {
       this.window.setIgnoreMouseEvents(true, { forward: true });
     });
 
-    this.window.webContents.on("did-finish-load", () => {
+    this.window.webContents.on('did-finish-load', () => {
       this.ready = true;
       if (NotificationContainer.CUSTOM_STYLES) {
-        this.window.webContents.send(
-          "custom-styles",
-          NotificationContainer.CUSTOM_STYLES
-        );
+        this.window.webContents.send('custom-styles', NotificationContainer.CUSTOM_STYLES);
       }
       this.notifications.forEach(this.displayNotification);
     });
@@ -137,8 +128,8 @@ class NotificationContainer {
    * @memberof NotificationContainer
    */
   private displayNotification = (notification: Notification) => {
-    this.window.webContents.send("notification-add", notification.getSource());
-    notification.emit("display");
+    this.window.webContents.send('notification-add', notification.getSource());
+    notification.emit('display');
     if (notification.options.timeout) {
       setTimeout(() => {
         notification.close();
@@ -155,8 +146,8 @@ class NotificationContainer {
    */
   public removeNotification(notification: Notification) {
     this.notifications.splice(this.notifications.indexOf(notification), 1);
-    this.window.webContents.send("notification-remove", notification.id);
-    notification.emit("close");
+    this.window.webContents.send('notification-remove', notification.id);
+    notification.emit('close');
   }
 
   /**

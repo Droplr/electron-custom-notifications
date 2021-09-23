@@ -1,6 +1,6 @@
-import NotificationContainer from "./NotificationContainer";
-import INotificationOptions from "./INotificationOptions";
-import Notification from "./Notification";
+import NotificationContainer from './NotificationContainer';
+import INotificationOptions from './INotificationOptions';
+import Notification from './Notification';
 
 /**
  * Handles the creation of NotificationContainer and
@@ -46,7 +46,7 @@ class NotificationManager {
       NotificationManager.container.removeNotification(notification);
 
       // Once we have no notifications left, destroy the container.
-      if (NotificationManager.container.notifications.length == 0) {
+      if (NotificationManager.container.notifications.length === 0) {
         NotificationManager.container.dispose();
         NotificationManager.container = null;
       }
@@ -60,9 +60,7 @@ class NotificationManager {
    * @param {INotificationOptions} options
    * @memberof NotificationManager
    */
-  public static createNotification(
-    options: INotificationOptions
-  ): Notification {
+  public static createNotification(options: INotificationOptions): Notification {
     const container = NotificationManager.getContainer();
     const notification = new Notification(options);
 

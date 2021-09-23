@@ -1,7 +1,7 @@
-import Notification from "./Notification";
-import NotificationManager from "./NotificationManager";
-import INotificationOptions from "./INotificationOptions";
-import NotificationContainer from "./NotificationContainer";
+import Notification from './Notification';
+import NotificationManager from './NotificationManager';
+import INotificationOptions from './INotificationOptions';
+import NotificationContainer from './NotificationContainer';
 /**
  * Spawns a new notification.
  * Warning: You MUST use this library from another
@@ -40,9 +40,4 @@ function setDefaultTemplate(template: string) {
   Notification.TEMPLATE = template;
 }
 
-export {
-  createNotification,
-  setContainerWidth,
-  setGlobalStyles,
-  setDefaultTemplate,
-};
+export { createNotification, setContainerWidth, setGlobalStyles, setDefaultTemplate };

@@ -1,5 +1,5 @@
-import INotificationOptions from "./INotificationOptions";
-import Notification from "./Notification";
+import INotificationOptions from './INotificationOptions';
+import Notification from './Notification';
 /**
  * Handles the creation of NotificationContainer and
  * Notifications that get pushed into them.

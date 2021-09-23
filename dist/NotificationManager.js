@@ -40,7 +40,7 @@ var NotificationManager = /** @class */ (function () {
         if (NotificationManager.container) {
             NotificationManager.container.removeNotification(notification);
             // Once we have no notifications left, destroy the container.
-            if (NotificationManager.container.notifications.length == 0) {
+            if (NotificationManager.container.notifications.length === 0) {
                 NotificationManager.container.dispose();
                 NotificationManager.container = null;
             }

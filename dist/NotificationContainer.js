@@ -57,8 +57,8 @@ var NotificationContainer = /** @class */ (function () {
          * @memberof NotificationContainer
          */
         this.displayNotification = function (notification) {
-            _this.window.webContents.send("notification-add", notification.getSource());
-            notification.emit("display");
+            _this.window.webContents.send('notification-add', notification.getSource());
+            notification.emit('display');
             if (notification.options.timeout) {
                 setTimeout(function () {
                     notification.close();
@@ -66,7 +66,7 @@ var NotificationContainer = /** @class */ (function () {
             }
         };
         var options = {};
-        var display = require("electron").screen.getPrimaryDisplay();
+        var display = require('electron').screen.getPrimaryDisplay();
         var displayWidth = display.workArea.x + display.workAreaSize.width;
         var displayHeight = display.workArea.y + display.workAreaSize.height;
         options.height = displayHeight;
@@ -84,26 +84,26 @@ var NotificationContainer = /** @class */ (function () {
         options.y = 0;
         this.window = new electron_1.BrowserWindow(options);
         this.window.setVisibleOnAllWorkspaces(true);
-        this.window.loadURL(path.join("file://", __dirname, "/container.html"));
+        this.window.loadURL(path.join('file://', __dirname, '/container.html'));
         this.window.setIgnoreMouseEvents(true, { forward: true });
         this.window.showInactive();
         // this.window.webContents.openDevTools();
-        electron_1.ipcMain.on("notification-clicked", function (e, id) {
-            var notification = _this.notifications.find(function (notification) { return notification.id == id; });
-            if (notification) {
-                notification.emit("click");
+        electron_1.ipcMain.on('notification-clicked', function (e, id) {
+            var n = _this.notifications.find(function (notification) { return notification.id === id; });
+            if (n) {
+                n.emit('click');
             }
         });
-        electron_1.ipcMain.on("make-clickable", function (e) {
+        electron_1.ipcMain.on('make-clickable', function (e) {
             _this.window.setIgnoreMouseEvents(false);
         });
-        electron_1.ipcMain.on("make-unclickable", function (e) {
+        electron_1.ipcMain.on('make-unclickable', function (e) {
             _this.window.setIgnoreMouseEvents(true, { forward: true });
         });
-        this.window.webContents.on("did-finish-load", function () {
+        this.window.webContents.on('did-finish-load', function () {
             _this.ready = true;
             if (NotificationContainer.CUSTOM_STYLES) {
-                _this.window.webContents.send("custom-styles", NotificationContainer.CUSTOM_STYLES);
+                _this.window.webContents.send('custom-styles', NotificationContainer.CUSTOM_STYLES);
             }
             _this.notifications.forEach(_this.displayNotification);
         });
@@ -130,8 +130,8 @@ var NotificationContainer = /** @class */ (function () {
      */
     NotificationContainer.prototype.removeNotification = function (notification) {
         this.notifications.splice(this.notifications.indexOf(notification), 1);
-        this.window.webContents.send("notification-remove", notification.id);
-        notification.emit("close");
+        this.window.webContents.send('notification-remove', notification.id);
+        notification.emit('close');
     };
     /**
      * Destroys the container.

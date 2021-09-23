@@ -1,6 +1,6 @@
 /// <reference types="node" />
-import INotificationOptions from "./INotificationOptions";
-import { EventEmitter } from "events";
+import INotificationOptions from './INotificationOptions';
+import { EventEmitter } from 'events';
 /**
  * Represents a Notification.
  * Emits two events:

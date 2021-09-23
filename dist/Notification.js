@@ -56,11 +56,11 @@ var Notification = /** @class */ (function (_super) {
      */
     Notification.prototype.getSource = function () {
         var template = this.options.template || Notification.TEMPLATE;
-        template = template.replace(new RegExp("%id%", "g"), this.id);
+        template = template.replace(new RegExp('%id%', 'g'), this.id);
         if (this.options.parameters && this.options.parameters.length > 0) {
-            for (var i = 0; i < this.options.parameters.length; i++) {
-                var parameter = this.options.parameters[i];
-                template = template.replace(new RegExp("%" + parameter.key + "%", "g"), parameter.value);
+            for (var _i = 0, _a = this.options.parameters; _i < _a.length; _i++) {
+                var parameter = _a[_i];
+                template = template.replace(new RegExp('%' + parameter.key + '%', 'g'), parameter.value);
             }
         }
         return template;
