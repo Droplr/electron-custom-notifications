@@ -7,7 +7,7 @@
   "types": "dist/index.d.ts",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "build": "tsc",
+    "build": "tsc && cp ./src/container.html ./dist/",
     "format": "prettier --write \"src/**/*.ts\"",
     "lint": "tslint -p tsconfig.json",
     "prepare" : "npm run build",
@@ -16,7 +16,7 @@
     "version" : "npm run format && git add -A src",
     "postversion" : "git push && git push --tags"
   },
-  "author": "Kedi Agbogre",
+  "author": "Marcus Orciuch",
   "license": "ISC",
   "devDependencies": {
     "@types/node": "^10.11.7",
