@@ -1,7 +1,8 @@
 # electron-custom-notifications
 Display customized HTML/CSS notifications in a cross-platform way. Instead of relying on Windows, Mac or Linux APIs to show notifications, this uses an extra Electron window to display them, giving the developer the freedom to style the notifications as they choose to.
 
-
+## Disclaimer
+The original author of this package is [kagbogre](https://github.com/kagbogre), and I (MarcusOy) have noticed that the npm package didn't exist. So this fork will be representative of what is inside the npm package. I will be adding some of my changes where I see fit. See the original repository [here](https://github.com/kagbogre/electron-custom-notifications).
 
 ## Installation
 To install simply: 
