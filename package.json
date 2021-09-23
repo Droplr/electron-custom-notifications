@@ -27,9 +27,6 @@
     "tslint-config-prettier": "^1.18.0",
     "typescript": "^3.1.2"
   },
-  "files": [
-    "lib/**/*"
-  ],
   "dependencies": {
     "uuid": "^3.3.2"
   }
