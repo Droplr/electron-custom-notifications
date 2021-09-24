@@ -1,4 +1,4 @@
-import { BrowserWindow, BrowserWindowConstructorOptions, ipcMain } from 'electron';
+import { BrowserWindow, BrowserWindowConstructorOptions, ipcMain, screen } from 'electron';
 import * as path from 'path';
 import Notification from './Notification';
 
@@ -15,7 +15,7 @@ class NotificationContainer {
    * @static
    * @memberof NotificationContainer
    */
-  public static CONTAINER_WIDTH: number = 300;
+  public static CONTAINER_WIDTH = 300;
   /**
    * Custom CSS styles to add to the container HTML.
    *
@@ -30,7 +30,7 @@ class NotificationContainer {
    * @type {boolean}
    * @memberof NotificationContainer
    */
-  public ready: boolean = false;
+  public ready = false;
   /**
    * Collection of Notifications that are currently inside
    * the container.
@@ -55,7 +55,7 @@ class NotificationContainer {
   constructor() {
     const options: BrowserWindowConstructorOptions = {};
 
-    const display = require('electron').screen.getPrimaryDisplay();
+    const display = screen.getPrimaryDisplay();
     const displayWidth = display.workArea.x + display.workAreaSize.width;
     const displayHeight = display.workArea.y + display.workAreaSize.height;
 

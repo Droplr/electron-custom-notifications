@@ -2,19 +2,23 @@
   "name": "electron-custom-notifications",
   "version": "1.0.0",
   "description": "Cross-platform notifications using Electron's BrowserWindow",
-  "keywords": ["electron", "custom", "notifications"],
+  "keywords": [
+    "electron",
+    "custom",
+    "notifications"
+  ],
   "main": "dist/index.js",
   "types": "dist/index.d.ts",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "build": "tsc && cp ./src/container.html ./dist/",
     "format": "prettier --write \"src/**/*.ts\"",
-    "lint": "tslint -p tsconfig.json",
-    "prepare" : "npm run build",
+    "lint": "eslint src --ext .ts",
+    "prepare": "npm run build",
     "prepublishOnly": "npm run lint",
-    "preversion" : "npm run lint",
-    "version" : "npm run format && git add -A src",
-    "postversion" : "git push && git push --tags"
+    "preversion": "npm run lint",
+    "version": "npm run format && git add -A src",
+    "postversion": "git push && git push --tags"
   },
   "author": "Marcus Orciuch",
   "license": "ISC",
@@ -22,9 +26,12 @@
     "@types/node": "^10.11.7",
     "@types/uuid": "^3.4.4",
     "electron": "^3.0.3",
-    "prettier": "^2.4.1",
-    "tslint": "^6.1.3",
-    "tslint-config-prettier": "^1.18.0",
+    "@typescript-eslint/eslint-plugin": "^4.29.2",
+    "@typescript-eslint/parser": "^4.29.2",
+    "eslint-config-prettier": "^7.0.0",
+		"eslint-plugin-prettier": "^3.3.0",
+		"prettier": "^2.2.1",
+		"prettier-eslint": "^12.0.0",
     "typescript": "^3.1.2"
   },
   "dependencies": {

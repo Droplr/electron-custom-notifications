@@ -36,7 +36,7 @@ class Notification extends EventEmitter {
    * @type {string}
    * @memberof Notification
    */
-  public static TEMPLATE: string = `
+  public static TEMPLATE = `
     <notification id="%id%">
         <h1>%title%</h1>
         <p>%body%</p>
