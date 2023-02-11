@@ -47,8 +47,8 @@ class NotificationManager {
 
       // Once we have no notifications left, destroy the container.
       if (NotificationManager.container.notifications.length === 0) {
-        NotificationManager.container.dispose();
-        NotificationManager.container = null;
+        //NotificationManager.container.dispose();
+        //NotificationManager.container = null;
       }
     }
   }
