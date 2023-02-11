@@ -1,6 +1,6 @@
 {
   "name": "electron-custom-notifications",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "Cross-platform notifications using Electron's BrowserWindow",
   "keywords": [
     "electron",
@@ -11,7 +11,7 @@
   "types": "dist/index.d.ts",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "build": "tsc && cp ./src/container.html ./dist/",
+    "build": "tsc && node -e \"require('node:fs').copyFileSync(__dirname + '/src/container.html', __dirname + '/dist/container.html')\"",
     "format": "prettier --write \"src/**/*.ts\"",
     "lint": "eslint src --ext .ts",
     "prepare": "npm run build",
@@ -25,13 +25,13 @@
   "devDependencies": {
     "@types/node": "^10.11.7",
     "@types/uuid": "^3.4.4",
-    "electron": "^3.0.3",
     "@typescript-eslint/eslint-plugin": "^4.29.2",
     "@typescript-eslint/parser": "^4.29.2",
+    "electron": "^3.0.3",
     "eslint-config-prettier": "^7.0.0",
-		"eslint-plugin-prettier": "^3.3.0",
-		"prettier": "^2.2.1",
-		"prettier-eslint": "^12.0.0",
+    "eslint-plugin-prettier": "^3.3.0",
+    "prettier": "^2.2.1",
+    "prettier-eslint": "^12.0.0",
     "typescript": "^3.1.2"
   },
   "dependencies": {

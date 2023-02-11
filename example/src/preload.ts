@@ -14,17 +14,30 @@ window.addEventListener("DOMContentLoaded", () => {
     replaceText(`${type}-version`, process.versions[type as keyof NodeJS.ProcessVersions]);
   }
 
+  const simple = document.getElementById('simple'),
+    image = document.getElementById('image'),
+    font = document.getElementById('font'),
+    actions = document.getElementById('actions');
+
   // Adding click listeners to buttons
-  document.getElementById('simple').addEventListener('click', () => {
-    ipcRenderer.send("SimpleNotification");
-  });
-  document.getElementById('image').addEventListener('click', () => {
-    ipcRenderer.send("ImageNotification");
-  });
-  document.getElementById('font').addEventListener('click', () => {
-    ipcRenderer.send("FontNotification");
-  });
-  document.getElementById('actions').addEventListener('click', () => {
-    ipcRenderer.send("ActionNotifications");
-  });
+  if (simple) {
+    simple.addEventListener('click', () => {
+      ipcRenderer.send("SimpleNotification");
+    });
+  }
+  if (image) {
+    image.addEventListener('click', () => {
+      ipcRenderer.send("ImageNotification");
+    });
+  }
+  if (font) {
+    font.addEventListener('click', () => {
+      ipcRenderer.send("FontNotification");
+    });
+  }
+  if (actions) {
+    actions.addEventListener('click', () => {
+      ipcRenderer.send("ActionNotifications");
+    });
+  }
 });
