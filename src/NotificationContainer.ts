@@ -72,6 +72,10 @@ class NotificationContainer {
     options.transparent = true;
     options.x = displayWidth - NotificationContainer.CONTAINER_WIDTH;
     options.y = 0;
+    options.webPreferences = {
+        nodeIntegration: true,
+        contextIsolation: false,
+    };
 
     this.window = new BrowserWindow(options);
     this.window.setVisibleOnAllWorkspaces(true);

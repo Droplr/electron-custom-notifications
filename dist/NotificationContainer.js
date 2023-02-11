@@ -82,6 +82,10 @@ var NotificationContainer = /** @class */ (function () {
         options.transparent = true;
         options.x = displayWidth - NotificationContainer.CONTAINER_WIDTH;
         options.y = 0;
+        options.webPreferences = {
+            nodeIntegration: true,
+            contextIsolation: false,
+        };
         this.window = new electron_1.BrowserWindow(options);
         this.window.setVisibleOnAllWorkspaces(true);
         this.window.loadURL(path.join('file://', __dirname, '/container.html'));
