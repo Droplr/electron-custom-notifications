@@ -61,27 +61,32 @@ class NotificationContainer {
 
     options.height = displayHeight;
     options.width = NotificationContainer.CONTAINER_WIDTH;
-    options.alwaysOnTop = true;
-    options.skipTaskbar = true;
-    options.resizable = false;
-    options.minimizable = false;
-    options.fullscreenable = false;
-    options.focusable = false;
     options.show = false;
     options.frame = false;
+    options.movable = false;
+    options.closable = false;
+    options.hasShadow = false;
+    options.focusable = false;
+    options.resizable = false;
+    options.thickFrame = false;
+    options.alwaysOnTop = true;
+    options.minimizable = false;
+    options.skipTaskbar = true;
     options.transparent = true;
+    options.titleBarStyle = 'hidden';
+    options.fullscreenable = false;
     options.x = displayWidth - NotificationContainer.CONTAINER_WIDTH;
     options.y = 0;
     options.webPreferences = {
-        nodeIntegration: true,
-        contextIsolation: false,
+      nodeIntegration: true,
+      contextIsolation: false,
     };
 
     this.window = new BrowserWindow(options);
+    this.window.setMenu(null);
+    this.window.setIgnoreMouseEvents(true);
     this.window.setVisibleOnAllWorkspaces(true);
     this.window.loadURL(path.join('file://', __dirname, '/container.html'));
-    this.window.setIgnoreMouseEvents(true, { forward: true });
-    this.window.showInactive();
     // this.window.webContents.openDevTools();
 
     ipcMain.on('notification-clicked', (e: any, id: string) => {
@@ -97,7 +102,7 @@ class NotificationContainer {
     });
 
     ipcMain.on('make-unclickable', (e: any) => {
-      this.window.setIgnoreMouseEvents(true, { forward: true });
+      this.window.setIgnoreMouseEvents(true);
     });
 
     this.window.webContents.on('did-finish-load', () => {
@@ -132,6 +137,7 @@ class NotificationContainer {
    * @memberof NotificationContainer
    */
   private displayNotification = (notification: Notification) => {
+    this.window.show();
     this.window.webContents.send('notification-add', notification.getSource());
     notification.emit('display');
     if (notification.options.timeout) {
@@ -152,6 +158,9 @@ class NotificationContainer {
     this.notifications.splice(this.notifications.indexOf(notification), 1);
     this.window.webContents.send('notification-remove', notification.id);
     notification.emit('close');
+    if (!this.notifications.length) {
+      this.window.hide();
+    }
   }
 
   /**

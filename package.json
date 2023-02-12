@@ -1,6 +1,6 @@
 {
   "name": "electron-custom-notifications",
-  "version": "1.0.3",
+  "version": "1.0.4",
   "description": "Cross-platform notifications using Electron's BrowserWindow",
   "keywords": [
     "electron",
@@ -11,7 +11,7 @@
   "types": "dist/index.d.ts",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "build": "tsc && node -e \"require('node:fs').copyFileSync(__dirname + '/src/container.html', __dirname + '/dist/container.html')\"",
+    "build": "tsc && tsc -p example && node -e \"require('node:fs').copyFileSync(__dirname + '/src/container.html', __dirname + '/dist/container.html')\"",
     "format": "prettier --write \"src/**/*.ts\"",
     "lint": "eslint src --ext .ts",
     "prepare": "npm run build",
