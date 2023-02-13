@@ -85,9 +85,14 @@ class NotificationContainer {
     this.window = new BrowserWindow(options);
     this.window.setMenu(null);
     this.window.setIgnoreMouseEvents(true);
-    this.window.setVisibleOnAllWorkspaces(true);
     this.window.loadURL(path.join('file://', __dirname, '/container.html'));
     // this.window.webContents.openDevTools();
+    setInterval(() => {
+      if (this.notifications.length) {
+          this.window.setAlwaysOnTop(true, 'screen-saver');
+          this.window.setVisibleOnAllWorkspaces(true);
+      }
+    }, 100);
 
     ipcMain.on('notification-clicked', (e: any, id: string) => {
       const n = this.notifications.find((notification) => notification.id === id);
