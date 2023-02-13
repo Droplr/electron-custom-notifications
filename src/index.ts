@@ -15,11 +15,23 @@ function createNotification(options: INotificationOptions): Notification {
   return NotificationManager.createNotification(options);
 }
 /**
+ * Fetch available screens.
+ */
+function getScreens(): Electron.Display[] {
+  return NotificationManager.getScreens();
+}
+/**
+ * Returns the number of notifications still displayed.
+ */
+function getNotificationsCount(): number {
+  return NotificationManager.getNotificationsCount();
+}
+/**
  * Adds custom CSS to the notification container head.
  *
  * @param {string} css
  */
-function setGlobalStyles(css: string) {
+function setGlobalStyles(css: string): void {
   NotificationContainer.CUSTOM_STYLES = css;
 }
 /**
@@ -28,7 +40,7 @@ function setGlobalStyles(css: string) {
  *
  * @param {number} width
  */
-function setContainerWidth(width: number) {
+function setContainerWidth(width: number): void {
   NotificationContainer.CONTAINER_WIDTH = width;
 }
 /**
@@ -36,8 +48,16 @@ function setContainerWidth(width: number) {
  *
  * @param {string} template
  */
-function setDefaultTemplate(template: string) {
+function setDefaultTemplate(template: string): void {
   Notification.TEMPLATE = template;
 }
+/**
+ * Choosing the screen on which to display notifications.
+ *
+ * @param {number} index
+ */
+function setScreen(index: number): void {
+  NotificationManager.setScreen(index);
+}
 
-export { createNotification, setContainerWidth, setGlobalStyles, setDefaultTemplate };
+export { createNotification, getScreens, getNotificationsCount, setContainerWidth, setGlobalStyles, setDefaultTemplate, setScreen };

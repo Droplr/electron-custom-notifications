@@ -58,7 +58,7 @@ class Notification extends EventEmitter {
    *
    * @memberof Notification
    */
-  public close() {
+  public close(): void {
     NotificationManager.destroyNotification(this);
   }
   /**

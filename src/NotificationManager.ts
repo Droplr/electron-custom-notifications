@@ -34,6 +34,34 @@ class NotificationManager {
 
     return NotificationManager.container;
   }
+
+  /**
+   * Fetch available screens.
+   *
+   * @memberof NotificationManager
+   */
+  public static getScreens(): Electron.Display[] {
+    return NotificationContainer.getScreens();
+  }
+  /**
+   * Returns the number of notifications still displayed.
+   *
+   * @memberof NotificationManager
+   */
+  public static getNotificationsCount(): number {
+    const container = NotificationManager.getContainer();
+    return container.getNotificationsCount();
+  }
+  /**
+   * Choosing the screen on which to display notifications.
+   *
+   * @param {number} index
+   * @memberof NotificationManager
+   */
+  public static setScreen(index: number): void {
+    const container = NotificationManager.getContainer();
+    container.setScreen(index);
+  }
   /**
    * Destroys a notification (and container if there are none left).
    *
@@ -41,7 +69,7 @@ class NotificationManager {
    * @param {Notification} notification
    * @memberof NotificationManager
    */
-  public static destroyNotification(notification: Notification) {
+  public static destroyNotification(notification: Notification): void {
     if (NotificationManager.container) {
       NotificationManager.container.removeNotification(notification);
 

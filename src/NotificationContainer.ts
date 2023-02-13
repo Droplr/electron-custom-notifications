@@ -32,6 +32,13 @@ class NotificationContainer {
    */
   public ready = false;
   /**
+   * Display screen index.
+   *
+   * @type {number}
+   * @memberof NotificationContainer
+   */
+  public screen = 0;
+  /**
    * Collection of Notifications that are currently inside
    * the container.
    *
@@ -89,8 +96,8 @@ class NotificationContainer {
     // this.window.webContents.openDevTools();
     setInterval(() => {
       if (this.notifications.length) {
-          this.window.setAlwaysOnTop(true, 'screen-saver');
-          this.window.setVisibleOnAllWorkspaces(true);
+        this.window.setAlwaysOnTop(true, 'screen-saver');
+        this.window.setVisibleOnAllWorkspaces(true);
       }
     }, 100);
 
@@ -120,13 +127,56 @@ class NotificationContainer {
   }
 
   /**
+   * Fetch available screens.
+   *
+   * @memberof NotificationContainer
+   */
+  public static getScreens(): Electron.Display[] {
+    return screen.getAllDisplays();
+  }
+
+  /**
+   * Returns the number of notifications still displayed.
+   *
+   * @memberof NotificationContainer
+   */
+  public getNotificationsCount(): number {
+    return this.notifications.length;
+  }
+
+  /**
+   * Changes the position according to the screen.
+   *
+   * @param {number} index
+   * @memberof NotificationContainer
+   */
+  public setScreen(index: number): void {
+    this.screen = index;
+    this.updateScreen();
+  }
+
+  /**
+   * Updates the position of notifications.
+   *
+   * @param {number} index
+   * @memberof NotificationContainer
+   */
+  public updateScreen(): void {
+    const screens = NotificationContainer.getScreens(),
+      index = (this.screen >= screens.length) ? 0 : this.screen,
+      displayWidth = screens[index].workArea.x + screens[index].workAreaSize.width;
+
+    this.window.setPosition((displayWidth - NotificationContainer.CONTAINER_WIDTH), 0);
+  }
+
+  /**
    * Adds a notification logically (notifications[]) and
    * physically (DOM Element).
    *
    * @param {Notification} notification
    * @memberof NotificationContainer
    */
-  public addNotification(notification: Notification) {
+  public addNotification(notification: Notification): void {
     if (this.ready) {
       this.displayNotification(notification);
     }
@@ -159,7 +209,7 @@ class NotificationContainer {
    * @param {Notification} notification
    * @memberof NotificationContainer
    */
-  public removeNotification(notification: Notification) {
+  public removeNotification(notification: Notification): void {
     this.notifications.splice(this.notifications.indexOf(notification), 1);
     this.window.webContents.send('notification-remove', notification.id);
     notification.emit('close');
@@ -173,7 +223,7 @@ class NotificationContainer {
    *
    * @memberof NotificationContainer
    */
-  public dispose() {
+  public dispose(): void {
     this.window.close();
   }
 }
