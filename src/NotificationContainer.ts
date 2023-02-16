@@ -92,6 +92,9 @@ class NotificationContainer {
     this.window = new BrowserWindow(options);
     this.window.setMenu(null);
     this.window.setIgnoreMouseEvents(true);
+    this.window.setAlwaysOnTop(true, 'screen-saver');
+    this.window.setVisibleOnAllWorkspaces(true);
+    this.updateScreen();
     this.window.loadURL(path.join('file://', __dirname, '/container.html'));
     // this.window.webContents.openDevTools();
     setInterval(() => {
@@ -164,9 +167,11 @@ class NotificationContainer {
   public updateScreen(): void {
     const screens = NotificationContainer.getScreens(),
       index = (this.screen >= screens.length) ? 0 : this.screen,
-      displayWidth = screens[index].workArea.x + screens[index].workAreaSize.width;
+      bounds = screens[index].bounds;
 
-    this.window.setPosition((displayWidth - NotificationContainer.CONTAINER_WIDTH), 0);
+    this.window.setPosition(((bounds.x + bounds.width) - NotificationContainer.CONTAINER_WIDTH), bounds.y);
+    this.window.setMinimumSize(NotificationContainer.CONTAINER_WIDTH, bounds.height); // fix
+    this.window.setSize(NotificationContainer.CONTAINER_WIDTH, bounds.height);
   }
 
   /**
