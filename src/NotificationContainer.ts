@@ -161,7 +161,6 @@ class NotificationContainer {
   /**
    * Updates the position of notifications.
    *
-   * @param {number} index
    * @memberof NotificationContainer
    */
   public updateScreen(): void {
@@ -172,6 +171,17 @@ class NotificationContainer {
     this.window.setPosition(((bounds.x + bounds.width) - NotificationContainer.CONTAINER_WIDTH), bounds.y);
     this.window.setMinimumSize(NotificationContainer.CONTAINER_WIDTH, bounds.height); // fix
     this.window.setSize(NotificationContainer.CONTAINER_WIDTH, bounds.height);
+  }
+
+  /**
+   * Updates the style of notifications.
+   *
+   * @memberof NotificationContainer
+   */
+  public updateGlobalStyles(): void {
+    if (this.ready && NotificationContainer.CUSTOM_STYLES) {
+      this.window.webContents.send('custom-styles', NotificationContainer.CUSTOM_STYLES);
+    }
   }
 
   /**

@@ -1,6 +1,6 @@
 {
   "name": "electron-custom-notifications",
-  "version": "1.0.7",
+  "version": "1.0.8",
   "description": "Cross-platform notifications using Electron's BrowserWindow",
   "keywords": [
     "electron",

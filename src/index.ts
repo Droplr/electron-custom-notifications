@@ -2,6 +2,7 @@ import Notification from './Notification';
 import NotificationManager from './NotificationManager';
 import INotificationOptions from './INotificationOptions';
 import NotificationContainer from './NotificationContainer';
+
 /**
  * Spawns a new notification.
  * Warning: You MUST use this library from another
@@ -14,18 +15,21 @@ import NotificationContainer from './NotificationContainer';
 function createNotification(options: INotificationOptions): Notification {
   return NotificationManager.createNotification(options);
 }
+
 /**
  * Fetch available screens.
  */
 function getScreens(): Electron.Display[] {
   return NotificationManager.getScreens();
 }
+
 /**
  * Returns the number of notifications still displayed.
  */
 function getNotificationsCount(): number {
   return NotificationManager.getNotificationsCount();
 }
+
 /**
  * Adds custom CSS to the notification container head.
  *
@@ -33,7 +37,9 @@ function getNotificationsCount(): number {
  */
 function setGlobalStyles(css: string): void {
   NotificationContainer.CUSTOM_STYLES = css;
+  NotificationManager.updateGlobalStyles();
 }
+
 /**
  * Changes the container's width.
  * @default 300
@@ -43,6 +49,7 @@ function setGlobalStyles(css: string): void {
 function setContainerWidth(width: number): void {
   NotificationContainer.CONTAINER_WIDTH = width;
 }
+
 /**
  * Changes the default notification template.
  *
@@ -51,6 +58,7 @@ function setContainerWidth(width: number): void {
 function setDefaultTemplate(template: string): void {
   Notification.TEMPLATE = template;
 }
+
 /**
  * Choosing the screen on which to display notifications.
  *

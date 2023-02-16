@@ -20,6 +20,7 @@ class NotificationManager {
    * @memberof NotificationManager
    */
   private static container: NotificationContainer | null;
+
   /**
    * Prepares a NotificationContainer.
    *
@@ -43,6 +44,7 @@ class NotificationManager {
   public static getScreens(): Electron.Display[] {
     return NotificationContainer.getScreens();
   }
+
   /**
    * Returns the number of notifications still displayed.
    *
@@ -52,6 +54,7 @@ class NotificationManager {
     const container = NotificationManager.getContainer();
     return container.getNotificationsCount();
   }
+
   /**
    * Choosing the screen on which to display notifications.
    *
@@ -62,6 +65,17 @@ class NotificationManager {
     const container = NotificationManager.getContainer();
     container.setScreen(index);
   }
+
+  /**
+   * Updates the style of notifications.
+   *
+   * @memberof NotificationManager
+   */
+  public static updateGlobalStyles(): void {
+    const container = NotificationManager.getContainer();
+    container.updateGlobalStyles();
+  }
+
   /**
    * Destroys a notification (and container if there are none left).
    *
@@ -80,6 +94,7 @@ class NotificationManager {
       }
     }
   }
+
   /**
    * Creates a new Notification and pushes it to the
    * NotificationContainer.
