@@ -16,6 +16,7 @@ class NotificationContainer {
    * @memberof NotificationContainer
    */
   public static CONTAINER_WIDTH = 300;
+
   /**
    * Custom CSS styles to add to the container HTML.
    *
@@ -24,6 +25,7 @@ class NotificationContainer {
    * @memberof NotificationContainer
    */
   public static CUSTOM_STYLES: string;
+
   /**
    * Determines if the container window has been loaded.
    *
@@ -31,13 +33,23 @@ class NotificationContainer {
    * @memberof NotificationContainer
    */
   public ready = false;
+
+  /**
+   * Position to the right rather than the left of the screen.
+   *
+   * @type {boolean}
+   * @memberof NotificationContainer
+   */
+  private right = true;
+
   /**
    * Display screen index.
    *
    * @type {number}
    * @memberof NotificationContainer
    */
-  public screen = 0;
+  private screen = 0;
+
   /**
    * Collection of Notifications that are currently inside
    * the container.
@@ -47,6 +59,7 @@ class NotificationContainer {
    * @memberof NotificationContainer
    */
   public notifications: Notification[] = [];
+
   /**
    * The Electron BrowserWindow for this container.
    *
@@ -55,6 +68,7 @@ class NotificationContainer {
    * @memberof NotificationContainer
    */
   private window: BrowserWindow;
+
   /**
    * Creates an instance of NotificationContainer.
    * @memberof NotificationContainer
@@ -159,6 +173,26 @@ class NotificationContainer {
   }
 
   /**
+   * Position notifications on the left of the screen.
+   *
+   * @memberof NotificationContainer
+   */
+  public toLeft(): void {
+    this.right = false;
+    this.updateScreen();
+  }
+
+  /**
+   * Position notifications on the right of the screen.
+   *
+   * @memberof NotificationContainer
+   */
+  public toRight(): void {
+    this.right = true;
+    this.updateScreen();
+  }
+
+  /**
    * Updates the position of notifications.
    *
    * @memberof NotificationContainer
@@ -166,9 +200,10 @@ class NotificationContainer {
   public updateScreen(): void {
     const screens = NotificationContainer.getScreens(),
       index = (this.screen >= screens.length) ? 0 : this.screen,
-      bounds = screens[index].bounds;
+      bounds = screens[index].workArea,
+      x = bounds.x + (this.right ? (bounds.width - NotificationContainer.CONTAINER_WIDTH) : 0);
 
-    this.window.setPosition(((bounds.x + bounds.width) - NotificationContainer.CONTAINER_WIDTH), bounds.y);
+    this.window.setPosition(x, bounds.y);
     this.window.setMinimumSize(NotificationContainer.CONTAINER_WIDTH, bounds.height); // fix
     this.window.setSize(NotificationContainer.CONTAINER_WIDTH, bounds.height);
   }

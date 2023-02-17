@@ -31,6 +31,15 @@ function getNotificationsCount(): number {
 }
 
 /**
+ * Choosing the screen on which to display notifications.
+ *
+ * @param {number} index
+ */
+function setScreen(index: number): void {
+  NotificationManager.setScreen(index);
+}
+
+/**
  * Adds custom CSS to the notification container head.
  *
  * @param {string} css
@@ -60,12 +69,27 @@ function setDefaultTemplate(template: string): void {
 }
 
 /**
- * Choosing the screen on which to display notifications.
- *
- * @param {number} index
+ * Position notifications on the left of the screen.
  */
-function setScreen(index: number): void {
-  NotificationManager.setScreen(index);
+function toLeft(): void {
+  NotificationManager.toLeft();
 }
 
-export { createNotification, getScreens, getNotificationsCount, setContainerWidth, setGlobalStyles, setDefaultTemplate, setScreen };
+/**
+ * Position notifications on the right of the screen.
+ */
+function toRight(): void {
+  NotificationManager.toRight();
+}
+
+export {
+  getScreens,
+  getNotificationsCount,
+  setScreen,
+  setGlobalStyles,
+  setContainerWidth,
+  setDefaultTemplate,
+  toLeft,
+  toRight,
+  createNotification
+};

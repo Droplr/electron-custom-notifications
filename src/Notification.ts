@@ -21,6 +21,7 @@ class Notification extends EventEmitter {
    * @memberof Notification
    */
   public id: string;
+
   /**
    * Supplied notification options.
    *
@@ -29,6 +30,7 @@ class Notification extends EventEmitter {
    * @memberof Notification
    */
   public options: INotificationOptions;
+
   /**
    * Default notification template.
    *
@@ -53,6 +55,7 @@ class Notification extends EventEmitter {
     this.id = uuid();
     this.options = options;
   }
+
   /**
    * Asks the NotificationManager to remove this notification.
    *
@@ -61,6 +64,7 @@ class Notification extends EventEmitter {
   public close(): void {
     NotificationManager.destroyNotification(this);
   }
+
   /**
    * Returns the processed template source.
    *

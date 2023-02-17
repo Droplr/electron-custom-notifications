@@ -67,6 +67,26 @@ class NotificationManager {
   }
 
   /**
+   * Position notifications on the left of the screen.
+   *
+   * @memberof NotificationManager
+   */
+  public static toLeft(): void {
+    const container = NotificationManager.getContainer();
+    container.toLeft();
+  }
+
+  /**
+   * Position notifications on the right of the screen.
+   *
+   * @memberof NotificationManager
+   */
+  public static toRight(): void {
+    const container = NotificationManager.getContainer();
+    container.toRight();
+  }
+
+  /**
    * Updates the style of notifications.
    *
    * @memberof NotificationManager
