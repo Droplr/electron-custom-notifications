@@ -1,7 +1,11 @@
 <!DOCTYPE html>
 <html>
+
   <head>
-    <style>
+    <meta charset="UTF-8" />
+    <meta http-equiv="Content-Security-Policy" content="default-src 'self'; img-src 'self' 'unsafe-inline' data:; script-src 'self' 'unsafe-inline'; style-src 'self' 'unsafe-inline'" />
+
+    <style type="text/css">
       /*/ DANEDEN'S ANIMATE.CSS /*/
       @charset "UTF-8";
 
@@ -3767,7 +3771,13 @@
         left: 0;
       }
     </style>
-    <script>
+    <style type="text/css" id="custom"></style>
+  </head>
+
+  <body>
+    <div id="notification-container"></div>
+
+    <script type="text/javascript">
       const ipc = require('electron').ipcRenderer;
 
       ipc.on('notification-add', (e, html) => {
@@ -3798,16 +3808,10 @@
       });
 
       ipc.on('custom-styles', (e, css) => {
-        const style = document.createElement('style');
-        style.type = 'text/css';
-        style.innerHTML = css;
-
-        document.querySelector('head').appendChild(style);
+        document.querySelector('#custom').innerHTML = css;
+        console.log('style:', document.querySelector('#custom').innerText);
       });
     </script>
-  </head>
-
-  <body>
-    <div id="notification-container"></div>
   </body>
+
 </html>
