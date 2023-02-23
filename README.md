@@ -7,7 +7,7 @@ The original author of this package is [kagbogre](https://github.com/kagbogre), 
 ## Installation
 To install simply: 
 ```
-npm i --save https://github.com/Arubinu/electron-custom-notifications
+npm i --save https://github.com/Droplr/electron-custom-notifications
 ```
 ## Full Usage
 Please note that you need to use this inside an existing Electron application after the `.on('ready')` event has been fired.
